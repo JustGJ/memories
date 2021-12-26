@@ -1,10 +1,18 @@
+// dependances
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
+// routes
+import postRoutes from './routes/posts.js';
+
 const app = express();
 
+// si on est sur /post, on exécute postRoutes
+app.use('/posts', postRoutes);
+
+// use est un moyen d'enregistrer un middleware ou une chaîne de middlewares (ou plusieurs middlewares) avant d'exécuter une logique de route finale
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());

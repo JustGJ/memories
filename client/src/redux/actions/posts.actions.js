@@ -1,6 +1,5 @@
 import * as api from '../../api';
 
-// Actions Creators
 export const getPosts = () => async (dispatch) => {
     try {
         // Récupération de tous les posts
@@ -18,6 +17,15 @@ export const createPost = (post) => async (dispatch) => {
         const { data } = await api.createPost(post);
         // Lorsque action.type = "CREATE", on envoie dans actions.payload, notre post
         dispatch({ type: 'CREATE', payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+export const updatePost = (id, post) => async (dispatch) => {
+    try {
+        const { data } = await api.updatePost(id, post);
+        dispatch({ type: 'UPDATE', payload: data });
     } catch (error) {
         console.log(error.message);
     }
